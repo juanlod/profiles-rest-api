@@ -4,6 +4,13 @@ from rest_framework import status
 from rest_framework import viewsets
 
 from profiles_api import serializers
+from profiles_api import models
+
+# Permisos
+from rest_framework.authentication import TokenAuthentication
+from profiles_api import permissions
+            
+
 
 
 class HelloApiView(APIView):
@@ -90,3 +97,13 @@ class HelloViewSet(viewsets.ViewSet):
     def destroy(self, request, pk=None):
         """Handle removing an object"""
         return Response({'http_method': 'DELETE'})
+    
+    
+class UserProfileViewSet(viewsets.ModelViewSet):
+    """Handle creating and updating profiles"""
+    serializer_class = serializers.UserProfileSerializer
+    queryset = models.UserProfile.objects.all()
+    # Se crea tupla de un solo elemento
+    authentication_classes = (TokenAuthentication, )
+    permission_classes = (permissions.UpdateOwnProfile,) 
+    

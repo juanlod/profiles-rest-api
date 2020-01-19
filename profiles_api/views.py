@@ -9,7 +9,9 @@ from profiles_api import models
 # Permisos
 from rest_framework.authentication import TokenAuthentication
 from profiles_api import permissions
-            
+
+# Busqueda
+from rest_framework import filters      
 
 
 
@@ -106,4 +108,5 @@ class UserProfileViewSet(viewsets.ModelViewSet):
     # Se crea tupla de un solo elemento
     authentication_classes = (TokenAuthentication, )
     permission_classes = (permissions.UpdateOwnProfile,) 
-    
+    filter_backends = (filters.SearchFilter,)
+    search_fields = ('name', 'email',)

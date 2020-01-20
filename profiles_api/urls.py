@@ -8,6 +8,7 @@ router = DefaultRouter()
 router.register('hello-viewset', views.HelloViewSet, base_name= 'hello-viewset')
 # Si solo es un conjunto de consultas, no es necesario poner el base_name. 
 router.register('profile', views.UserProfileViewSet)
+router.register('feed', views.UserProfileFeedViewSet)
 
 
 urlpatterns = [
